@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TicketsFacturas" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="27483a24-e15c-4c38-91df-94a50646bffb">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[Select * From tickets]]>
+	</queryString>
+	<field name="idTickets" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="FechaTickets" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Articulos" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TotalTicket" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="idArticulosFK1" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<group name="TotalTicket">
+		<groupExpression><![CDATA[$F{TotalTicket}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="79" backcolor="#99FF99" uuid="e9e0a8e6-86f5-4c9b-b260-b90aea034be4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Consulta de Tickets]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="47" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="12" width="100" height="20" uuid="a500580c-1f0e-4c05-85fe-a3e1c8ac28a3"/>
+				<text><![CDATA[idTickets]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="122" y="12" width="100" height="20" uuid="45cd56dd-8f40-4ce8-9454-7977d86e8329"/>
+				<text><![CDATA[FechaTickets]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="295" y="12" width="100" height="20" uuid="f1aaa9f9-1568-4fd4-a586-04bb64fe46b2"/>
+				<text><![CDATA[Articulos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="12" width="100" height="20" uuid="e315c132-707d-4404-aac5-a77083f37d3c"/>
+				<text><![CDATA[TotalTicket]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="bbf65d49-3c73-418a-a8aa-3baf19661be8"/>
+				<textFieldExpression><![CDATA[$F{idTickets}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="122" y="0" width="100" height="20" uuid="bd15e12c-9d62-42bf-8693-19bd7d392b63"/>
+				<textFieldExpression><![CDATA[$F{FechaTickets}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="295" y="0" width="100" height="20" uuid="436b1db9-382f-4d1d-acd4-bb4c0dc75a6c"/>
+				<textFieldExpression><![CDATA[$F{Articulos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="0" width="100" height="20" uuid="f5615bfb-e81f-40b6-bec5-1d781a7a8770"/>
+				<textFieldExpression><![CDATA[$F{TotalTicket}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="50"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
