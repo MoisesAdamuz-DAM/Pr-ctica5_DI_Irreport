@@ -35,15 +35,15 @@ import java.awt.event.ActionEvent;
 import java.awt.Choice;
 import java.awt.Desktop;
 
-public class ConsultaFechaTicket extends JFrame implements WindowListener{
+public class ArticulosReport extends JFrame implements WindowListener{
 
 	private JPanel contentPane;
 	private JTextField txtDesde;
 	private JTextField txtHasta;
 
 
-	public ConsultaFechaTicket() {
-		setTitle("Consulta Tickets");
+	public ArticulosReport() {
+		setTitle("Consulta Artículos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 326, 229);
 		contentPane = new JPanel();
@@ -112,8 +112,6 @@ public class ConsultaFechaTicket extends JFrame implements WindowListener{
 		         	// Abrir el fichero PDF generado
 					File path = new File ("TicketFecha.pdf");
 					Desktop.getDesktop().open(path);
-					
-					setVisible(false);
 					}
 					catch (Exception ex)
 					{
@@ -192,5 +190,4 @@ public class ConsultaFechaTicket extends JFrame implements WindowListener{
 		
 	}
 }
-
 

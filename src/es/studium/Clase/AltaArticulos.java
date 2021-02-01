@@ -16,10 +16,23 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.awt.event.ActionEvent;
 
+/**
+ * En esta clase realizaremos el Alta de los artículos de la base de datos Tiendecita
+ * 
+ * @author Moisés Adamuz Fernández
+ * @since 28/01/2020
+ * @version  1.0
+ * 
+ * 
+ */
 public class AltaArticulos extends JFrame implements WindowListener{
 
+
+	
 	/**
-	 * 
+	 * Comenzamos declarando los atributos 
+	 * Instanciamos la clase ConfirmaciónAltaArticulo, para cuando pulsemos en el botón Aceptar, nos aparecerá la interfaz de confirmación del
+	 * alta
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -28,7 +41,18 @@ public class AltaArticulos extends JFrame implements WindowListener{
 	private JTextField txtArticulo;
 	ConfirmacionAltaArticulo correcto;
 
-	
+	/**
+	 *Creamos el método donde estarán todas las instrucciones para la creación de la interfaz de Alta Artículos
+	 *
+	 *@ contentPane JPanel, Contenedor donde meteremos todos lo componentes de la interfaz
+	 *lblNombre JLabel, <b>Indica donde tendremos que escribir el nombre del Artículo</b>
+	 * lblCantidad JCantidad, <b>Indica donde tendremos que escribir las cantidades del artículo</b>
+	 * lblArticulo JArticulo,  <b>Indica donde tendremos que escribir el precio del Artículo</b>
+	 *txtNombre JTextField,  <b>Cuadro de Texto donde tendremos que escribir el nombre del Artículo</b>
+	 * txtCantidad JTextField, <b>Cuadro de Texto donde tendremos que escribir la cantidad del Artículo</b>
+	 * txtArticulo JTextField, <b>Cuadro de Texto donde tendremos que escribir el precio del Artículo</b>
+	 *
+	 */
 	public AltaArticulos() {
 		setTitle("Alta Art\u00EDculos");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);//Con el DISPOSE consigo que no se vea y evito que se cierre la app entera
@@ -69,7 +93,8 @@ public class AltaArticulos extends JFrame implements WindowListener{
 		JButton btnAceptar = new JButton("Aceptar");
 		
 		
-		
+		/**
+		 * btnAceptar JButton, <b>Botón con el que ejecutaremos la operación</b>*/
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				//Conectar a la BD
@@ -118,6 +143,13 @@ public class AltaArticulos extends JFrame implements WindowListener{
 		
 		
 	}
+	/**
+	 * @exception  try/catch (SQLException) (ClassNotFoundException)
+	 * driver String
+	 *  url String
+	 *  login String
+	 *  password String
+	 *  con Connection*/
 	private Connection conectar() {
 		String driver = "com.mysql.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/Tiendecita?useSSL=false";

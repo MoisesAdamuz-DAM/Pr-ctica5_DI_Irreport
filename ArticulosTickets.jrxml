@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ArticulosTickets" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c01c52d4-67bd-4a7d-aed2-a08fa60a7e6f">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<queryString language="SQL">
+		<![CDATA[Select * From articulos;]]>
+	</queryString>
+	<field name="idArticulos" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="DescripcionArticulos" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CantidadStock" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="PrecioArticulos" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<group name="DescripcionArticulos">
+		<groupExpression><![CDATA[$F{DescripcionArticulos}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<image>
+				<reportElement x="-20" y="0" width="595" height="64" uuid="eb9f648f-8393-43b2-84e0-cede0dd71ceb"/>
+				<imageExpression><![CDATA["wood.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="Title" x="0" y="5" width="263" height="33" uuid="fa43bcdf-dfe1-4f58-b488-851a6e912cfd"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Consultar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="63" y="39" width="200" height="22" forecolor="#FFFFFF" uuid="cdbcb98f-13a7-42d1-9ae5-fa58c0923120"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Artículos]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement style="Column header" x="0" y="4" width="75" height="15" uuid="6269f56f-1522-4b35-9d93-677161e41d40"/>
+				<text><![CDATA[idArticulos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="294" y="4" width="94" height="15" uuid="5be36764-0b05-431b-854c-0ab31afd65e0"/>
+				<text><![CDATA[CantidadStock]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="446" y="4" width="99" height="15" uuid="28bc5b57-c46e-40bf-bd05-0b385cce6072"/>
+				<text><![CDATA[PrecioArticulos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="124" y="4" width="100" height="20" uuid="adc1dfa0-4962-4793-bbf7-da605a9449d7"/>
+				<text><![CDATA[DescripcionArticulos]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="32" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="1" width="555" height="1" uuid="375b1961-054b-43a1-8ec8-f06664fda3c8"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="0" y="6" width="92" height="15" uuid="d91b22b2-047a-481f-9c22-6c21a78e5899"/>
+				<textFieldExpression><![CDATA[$F{idArticulos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="279" y="6" width="109" height="15" uuid="1da0182d-b5a4-4c06-a89a-601e918cc054"/>
+				<textFieldExpression><![CDATA[$F{CantidadStock}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="446" y="6" width="107" height="15" uuid="a5543d0c-1799-4e03-8411-e110876d8d3e"/>
+				<textFieldExpression><![CDATA[$F{PrecioArticulos}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="23" width="555" height="1" uuid="3dd0db16-fb8b-44f2-a745-18ff9a756ad8"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="124" y="6" width="100" height="17" uuid="82666278-544b-40b3-a7f8-02b07589e74f"/>
+				<textFieldExpression><![CDATA[$F{DescripcionArticulos}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="3a1dcde0-b134-4435-9090-fccb1ceffe60"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="9431a9f1-3e22-4eea-b16c-dcb58449778a"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="384d8ab3-2866-4120-8b98-7869abe5218f"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

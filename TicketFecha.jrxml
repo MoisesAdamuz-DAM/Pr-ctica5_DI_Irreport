@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TicketFecha" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="398fa18b-5d9d-444b-96c5-0826f3d86098">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="FechaDesde" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="FechaHasta" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT * FROM tickets WHERE FechaTickets BETWEEN $P{FechaDesde} AND $P{FechaHasta};]]>
+	</queryString>
+	<field name="idTickets" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="FechaTickets" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Articulos" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TotalTicket" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="idArticulosFK1" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<group name="TotalTicket">
+		<groupExpression><![CDATA[$F{TotalTicket}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="64" splitType="Stretch">
+			<image>
+				<reportElement x="-20" y="0" width="595" height="64" uuid="39735c8b-f68d-44c6-8801-981336e166c9"/>
+				<imageExpression><![CDATA["wood.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="Title" x="0" y="5" width="263" height="33" uuid="99c76758-24bb-42e2-bca0-b100e55c3cc2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Consultar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="63" y="39" width="200" height="22" forecolor="#FFFFFF" uuid="202fd424-e55e-49cf-90cc-ca5785c16224"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tickets]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="39" splitType="Stretch">
+			<staticText>
+				<reportElement style="Column header" x="0" y="19" width="74" height="15" uuid="0d7430cb-e388-423c-85b8-f83333283b12"/>
+				<text><![CDATA[idTickets]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="115" y="19" width="82" height="15" uuid="2b93b665-6fcc-4777-91a8-140b9db2fab2"/>
+				<text><![CDATA[FechaTickets]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="246" y="19" width="75" height="15" uuid="43d389f9-98b5-4d8b-8908-f2cafa653256"/>
+				<text><![CDATA[Articulos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="453" y="19" width="99" height="15" uuid="64dc096f-56c4-4ba2-be27-84fdfde0b88e"/>
+				<text><![CDATA[idArticulosFK1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="342" y="19" width="100" height="14" forecolor="#666666" uuid="5fea180a-01e0-4de7-87d4-581fb868a715"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TotalTicket]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="78" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="f0d6c3ed-500e-4610-bea5-9d89d8cb979e"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="0" y="20" width="74" height="15" uuid="ea0a9f18-6fb8-4728-827d-9fed1addfb9b"/>
+				<textFieldExpression><![CDATA[$F{idTickets}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="115" y="20" width="102" height="15" uuid="2388a34e-b877-4df7-9fdf-b7da7356f09d"/>
+				<textFieldExpression><![CDATA[$F{FechaTickets}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="246" y="20" width="75" height="15" uuid="b208a537-39c1-4db8-9136-72da068872e6"/>
+				<textFieldExpression><![CDATA[$F{Articulos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="446" y="20" width="109" height="15" uuid="e495034f-7d7e-4be3-97a1-6b7c9995e438"/>
+				<textFieldExpression><![CDATA[$F{idArticulosFK1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="342" y="20" width="91" height="20" uuid="2db25b6c-8a69-4009-8daf-18d76c30bf1f"/>
+				<textFieldExpression><![CDATA[$F{TotalTicket}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="40" width="555" height="1" uuid="eca0dbbe-f1c0-4407-9640-074e80dc73ea"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="217" y="47" width="100" height="20" uuid="bcc9dbd8-280a-4c26-b743-7191b780f1a5"/>
+				<textFieldExpression><![CDATA[$P{FechaDesde}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="74" y="47" width="100" height="20" uuid="8fb3b95a-f8ae-4af1-b9c9-8b11b6317ecd"/>
+				<textFieldExpression><![CDATA[$P{FechaHasta}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="53" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="26d8b21c-eca3-4a43-be4e-1dd20bfd74f0"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="6159ef35-a00f-450c-89db-7707f97f78ad"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="c6822ea8-8e0a-4a00-ac15-b38008ff109f"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

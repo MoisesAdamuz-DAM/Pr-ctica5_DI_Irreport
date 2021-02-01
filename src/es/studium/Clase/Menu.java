@@ -94,8 +94,7 @@ public class Menu extends JFrame {
 			}
 		});
 		
-		JMenuItem mntmNewMenuItem_7 = new JMenuItem("Consultar por Fechas");
-		mnNewMenu.add(mntmNewMenuItem_7);
+		
 		
 		
 		JMenu mnNewMenu_1 = new JMenu("Tickets");
