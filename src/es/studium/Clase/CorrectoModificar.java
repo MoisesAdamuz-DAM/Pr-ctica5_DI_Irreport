@@ -9,28 +9,19 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 
+/**
+ * Creamos un mensaje de confiramación de que la modificación se ha realizado
+ * correctamente
+ * 
+ * @author Moisés Adamuz
+ *
+ */
 public class CorrectoModificar extends JFrame {
 
 	private JPanel contentPane;
 
 	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					CorrectoModificar frame = new CorrectoModificar();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
-	/**
-	 * Create the frame.
+	 * Diseñamos la interfaz
 	 */
 	public CorrectoModificar() {
 		setTitle("Correcto");
@@ -40,11 +31,11 @@ public class CorrectoModificar extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel lblNewLabel = new JLabel("\u00A1El art\u00EDculo ha sido modificado con \u00E9xito!");
 		lblNewLabel.setBounds(27, 34, 247, 14);
 		contentPane.add(lblNewLabel);
-		
+
 		JButton btnNewButton = new JButton("Aceptar");
 		btnNewButton.setBounds(89, 72, 89, 30);
 		contentPane.add(btnNewButton);

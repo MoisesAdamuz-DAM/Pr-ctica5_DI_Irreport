@@ -11,28 +11,18 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * En esta clase declararemos un error al realizar el alta de los artículos
+ * 
+ * @author Moisés Adamuz
+ *
+ */
 public class ErrorAltaArticulos extends JFrame {
 
 	private JPanel contentPane;
 
 	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					ErrorAltaArticulos frame = new ErrorAltaArticulos();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
-	/**
-	 * Create the frame.
+	 * Diseñamos la interfaz
 	 */
 	public ErrorAltaArticulos() {
 		setTitle("Error");
@@ -42,11 +32,11 @@ public class ErrorAltaArticulos extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel lblNewLabel = new JLabel("\u00A1No se ha podido realizar el alta correctamente!");
 		lblNewLabel.setBounds(10, 27, 267, 14);
 		contentPane.add(lblNewLabel);
-		
+
 		JButton btnNewButton = new JButton("Aceptar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

@@ -9,11 +9,20 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 
+/**
+ * En esta clase vamos a crear la interfaz de confirmación de la baja realizada
+ * con éxito
+ * 
+ * @author Moisés Adamuz
+ *
+ */
 public class CorrectoBaja extends JFrame {
 
 	private JPanel contentPane;
 
-
+	/**
+	 * Diseñamos la interfaz
+	 */
 	public CorrectoBaja() {
 		setTitle("Correcto");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -22,11 +31,11 @@ public class CorrectoBaja extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel lblNewLabel = new JLabel("\u00A1El art\u00EDculo se ha eliminado correctamente!");
 		lblNewLabel.setBounds(22, 33, 300, 14);
 		contentPane.add(lblNewLabel);
-		
+
 		JButton btnNewButton = new JButton("Aceptar");
 		btnNewButton.setBounds(102, 84, 89, 23);
 		contentPane.add(btnNewButton);

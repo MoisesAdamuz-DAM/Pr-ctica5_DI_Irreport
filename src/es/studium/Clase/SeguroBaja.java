@@ -14,11 +14,19 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
+/**
+ * Interfaz con la que confirmamos que estamos seguros de realizar la baja
+ * 
+ * @author Moisés Adamuz
+ *
+ */
 public class SeguroBaja extends JFrame {
 
-	
 	private JPanel contentPane;
 
+	/**
+	 * Establecemos la interfaz
+	 */
 	public SeguroBaja() {
 		setTitle("\u00BFSeguro?");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -28,20 +36,20 @@ public class SeguroBaja extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		setVisible(true);
-		
+
 		JLabel lblNewLabel = new JLabel("\u00BFEst\u00E1 seguro de eliminar este art\u00EDculo?");
 		lblNewLabel.setBounds(35, 25, 227, 14);
 		contentPane.add(lblNewLabel);
-		
+
 		JButton btnSi = new JButton("Si");
 		btnSi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 			}
 		});
 		btnSi.setBounds(48, 77, 68, 23);
 		contentPane.add(btnSi);
-		
+
 		JButton btnNo = new JButton("No");
 		btnNo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -52,6 +60,11 @@ public class SeguroBaja extends JFrame {
 		contentPane.add(btnNo);
 	}
 
+	/**
+	 * Realizamos la conexión con la BD
+	 * 
+	 * @return
+	 */
 	private Connection conectar() {
 		String driver = "com.mysql.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/Tiendecita?useSSL=false";

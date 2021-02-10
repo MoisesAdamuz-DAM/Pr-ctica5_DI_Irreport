@@ -22,6 +22,12 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * Realizamos la baja del artículo
+ * 
+ * @author Moisés Adamuz
+ *
+ */
 public class BajaArt extends JFrame {
 
 	private JPanel contentPane;
@@ -30,7 +36,9 @@ public class BajaArt extends JFrame {
 	SeguroBaja seguro = new SeguroBaja();
 	ErrorBaja error = new ErrorBaja();
 
-
+	/**
+	 * Diseñamos la interfaz de la baja
+	 */
 	public BajaArt() {
 		setTitle("Baja Art\u00EDculos");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -40,54 +48,51 @@ public class BajaArt extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		setVisible(true);
-		
-		// Montar el Choice
-				choArticulos.add("Seleccionar uno...");
-				// Conectar a la base de datos
-				Connection con = conectar();
-				// Sacar los datos de la tabla empleados
-				// Rellenar el Choice
-				String sqlSelect = "SELECT * FROM Articulos";
-				try {
-					// CREAR UN STATEMENT PARA UNA CONSULTA SELECT
-					Statement stmt = con.createStatement();
-					ResultSet rs = stmt.executeQuery(sqlSelect);
-					while (rs.next()) 
-					{
-						//Queremos que nos aparezca el el choice, el idEmpleado y el nombreEmpleado
 
-						choArticulos.add(rs.getInt("idArticulos") 
-								+ "-" + rs.getString("DescripcionArticulos") 
-								+ ", "+ rs.getInt("CantidadStock"));
-					}
-					rs.close();
-					stmt.close();
-				} catch (SQLException ex) {
-					System.out.println("ERROR:al consultar");
-					ex.printStackTrace();
-				}
-				// Cerrar la conexión
-				desconectar(con);
-		
-		
+		// Montar el Choice
+		choArticulos.add("Seleccionar uno...");
+		// Conectar a la base de datos
+		Connection con = conectar();
+		// Sacar los datos de la tabla empleados
+		// Rellenar el Choice
+		String sqlSelect = "SELECT * FROM Articulos";
+		try {
+			// CREAR UN STATEMENT PARA UNA CONSULTA SELECT
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(sqlSelect);
+			while (rs.next()) {
+				// Queremos que nos aparezca el el choice, el idEmpleado y el nombreEmpleado
+
+				choArticulos.add(rs.getInt("idArticulos") + "-" + rs.getString("DescripcionArticulos") + ", "
+						+ rs.getInt("CantidadStock"));
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException ex) {
+			System.out.println("ERROR:al consultar");
+			ex.printStackTrace();
+		}
+		// Cerrar la conexión
+		desconectar(con);
+
 		choArticulos.setBounds(176, 29, 132, 34);
 		contentPane.add(choArticulos);
-		
+
 		JLabel lblElegir = new JLabel("Elija un Art\u00EDuclo:");
 		lblElegir.setBounds(45, 35, 112, 14);
 		contentPane.add(lblElegir);
-		
+
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
-			SeguroBaja();
-			
+
+				SeguroBaja();
+
 			}
 		});
 		btnAceptar.setBounds(72, 112, 89, 36);
 		contentPane.add(btnAceptar);
-		
+
 		JButton btnLimpiar = new JButton("Limpiar");
 		btnLimpiar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -97,9 +102,13 @@ public class BajaArt extends JFrame {
 		btnLimpiar.setBounds(233, 112, 89, 36);
 		contentPane.add(btnLimpiar);
 	}
-	
+
+	/**
+	 * Insertamos la interfaz que nos pregunta si estamos seguro de querer realizar
+	 * la baja
+	 */
 	public void SeguroBaja() {
-		
+
 		seguro.setTitle("\u00BFSeguro?");
 		seguro.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		seguro.setBounds(100, 100, 305, 169);
@@ -108,27 +117,24 @@ public class BajaArt extends JFrame {
 		seguro.setContentPane(contentPane);
 		contentPane.setLayout(null);
 		seguro.setVisible(true);
-		
+
 		JLabel lblNewLabel = new JLabel("\u00BFEst\u00E1 seguro de eliminar este art\u00EDculo?");
 		lblNewLabel.setBounds(35, 25, 227, 14);
 		contentPane.add(lblNewLabel);
-		
+
 		JButton btnSi = new JButton("Si");
 		btnSi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Conectar a BD
-				Connection con = conectar(); 
+				Connection con = conectar();
 				// Borrar
-				String[] Articulos =choArticulos.getSelectedItem().split("-");
+				String[] Articulos = choArticulos.getSelectedItem().split("-");
 				int respuesta = borrar(con, Integer.parseInt(Articulos[0]));
-				
+
 				// Mostramos resultado
-				if(respuesta == 0)
-				{
+				if (respuesta == 0) {
 					System.out.println("Borrado de Artículo correcto");
-				}
-				else
-				{
+				} else {
 					System.out.println("Error en Artículo ");
 					error.setVisible(true);
 				}
@@ -140,12 +146,10 @@ public class BajaArt extends JFrame {
 					// CREAR UN STATEMENT PARA UNA CONSULTA SELECT
 					Statement stmt = con.createStatement();
 					ResultSet rs = stmt.executeQuery(sqlSelect);
-					while (rs.next()) 
-					{
+					while (rs.next()) {
 
-						choArticulos.add(rs.getInt("idArticulos") 
-								+ "-" + rs.getString("DescripcionArticulos") 
-								+ ", "+ rs.getString("CantidadStock"));
+						choArticulos.add(rs.getInt("idArticulos") + "-" + rs.getString("DescripcionArticulos") + ", "
+								+ rs.getString("CantidadStock"));
 					}
 					ConfirmacionBaja();
 					rs.close();
@@ -153,18 +157,17 @@ public class BajaArt extends JFrame {
 				} catch (SQLException ex) {
 					System.out.println("ERROR:al consultar");
 					ex.printStackTrace();
-					
+
 				}
-				
+
 				// Desconectar
 				desconectar(con);
-				
-			
+
 			}
 		});
 		btnSi.setBounds(48, 77, 68, 23);
 		contentPane.add(btnSi);
-		
+
 		JButton btnNo = new JButton("No");
 		btnNo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -174,8 +177,11 @@ public class BajaArt extends JFrame {
 		btnNo.setBounds(174, 77, 68, 23);
 		contentPane.add(btnNo);
 	}
-	
-   
+
+	/**
+	 * Aquí nos aparecerá una interfaz confirmando que la baja se ha realizado
+	 * correctamente
+	 */
 	public void ConfirmacionBaja() {
 		confirmar.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		confirmar.setBounds(100, 100, 317, 161);
@@ -184,11 +190,11 @@ public class BajaArt extends JFrame {
 		confirmar.setContentPane(contentPane);
 		contentPane.setLayout(null);
 		confirmar.setVisible(true);
-		
+
 		JLabel lblNewLabel = new JLabel("\u00A1La baja del art\u00EDculo se realiz\u00F3 correctamente!");
 		lblNewLabel.setBounds(43, 23, 260, 14);
 		contentPane.add(lblNewLabel);
-		
+
 		JButton btnNewButton = new JButton("Aceptar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -200,7 +206,12 @@ public class BajaArt extends JFrame {
 		btnNewButton.setBounds(99, 64, 89, 23);
 		contentPane.add(btnNewButton);
 	}
-	
+
+	/**
+	 * Realizamos la conexión con la BD
+	 * 
+	 * @return
+	 */
 	private Connection conectar() {
 		String driver = "com.mysql.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/Tiendecita?useSSL=false";
@@ -224,6 +235,11 @@ public class BajaArt extends JFrame {
 		}
 		return con;
 	}
+
+	/**
+	 * Nos aparecerá una interfaz con un mensaje, en caso de que se haya producido
+	 * un error en la baja
+	 */
 	public void ErrorBaja() {
 		error.setTitle("Error");
 		error.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -233,11 +249,11 @@ public class BajaArt extends JFrame {
 		error.setContentPane(contentPane);
 		contentPane.setLayout(null);
 		error.setVisible(true);
-		
+
 		JLabel lblNewLabel = new JLabel("\u00A1No se ha podido dar de baja!");
 		lblNewLabel.setBounds(49, 11, 209, 14);
 		contentPane.add(lblNewLabel);
-		
+
 		JButton btnNewButton = new JButton("Aceptar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -247,39 +263,45 @@ public class BajaArt extends JFrame {
 		btnNewButton.setBounds(88, 55, 89, 23);
 		contentPane.add(btnNewButton);
 	}
-	
+
+	/**
+	 * Realizamos el borrado
+	 * 
+	 * @param con,         establecemos la conexción para poder realizar el borrado
+	 * @param idArticulos, establecemos el parámetro con el que queremos hacer el
+	 *                     borrado
+	 * @return
+	 */
 	private int borrar(Connection con, int idArticulos) {
 		int respuesta = 0;
 		String sql = "DELETE FROM articulos WHERE idArticulos = " + idArticulos;
 		System.out.println(sql);
-		try 
-		{
+		try {
 			// Creamos un STATEMENT para una consulta SQL INSERT.
 			Statement sta = con.createStatement();
 			sta.executeUpdate(sql);
 			sta.close();
-		} 
-		catch(MySQLIntegrityConstraintViolationException fk)
-		{
+		} catch (MySQLIntegrityConstraintViolationException fk) {
 			System.out.println("ERROR:No se puede dar de baja al alumno");
 			respuesta = 1;
-		}
-		catch (SQLException ex) 
-		{
+		} catch (SQLException ex) {
 			System.out.println("ERROR:al hacer un Delete");
 			ex.printStackTrace();
 			respuesta = 1;
 		}
 		return respuesta;
 	}
-	private void desconectar(Connection con) 
-	{
-		try
-		{
+
+	/**
+	 * 
+	 * @param con, cerramos la conexión
+	 */
+	private void desconectar(Connection con) {
+		try {
 			con.close();
+		} catch (Exception e) {
 		}
-		catch(Exception e) {}
-		
+
 	}
 
 }

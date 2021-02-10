@@ -1,6 +1,6 @@
 package es.studium.Clase;
 
-import java.awt.BorderLayout; 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.TextArea;
 import java.awt.event.ActionEvent;
@@ -17,10 +17,19 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+/**
+ * Realizamos la consulta de los tickets
+ * 
+ * @author Moisés Adamuz
+ *
+ */
 public class ConsultarTickets extends JFrame {
 	TextArea consulta = new TextArea();
 	private JPanel contentPane;
 
+	/**
+	 * Diseñamos la interfaz
+	 */
 	public ConsultarTickets() {
 		setTitle("Consultar Tickets");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -32,17 +41,16 @@ public class ConsultarTickets extends JFrame {
 		setVisible(true);
 		// Conectar a la base de datos
 		Connection con = conectar();
-		//Sacar la información
-		rellenarTextArea(con, consulta);	
-		
+		// Sacar la información
+		rellenarTextArea(con, consulta);
+
 		JLabel lblNewLabel = new JLabel("Tickets:");
 		lblNewLabel.setBounds(20, 92, 59, 14);
 		contentPane.add(lblNewLabel);
-		
-		
+
 		consulta.setBounds(85, 34, 365, 160);
 		contentPane.add(consulta);
-		
+
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -51,9 +59,15 @@ public class ConsultarTickets extends JFrame {
 		});
 		btnAceptar.setBounds(470, 84, 120, 30);
 		contentPane.add(btnAceptar);
-		
-		
+
 	}
+
+	/**
+	 * 
+	 * @param con, establecemos la conexión
+	 * @param t,   definimos el text area, donde queremos que nos meta la
+	 *             información
+	 */
 	private void rellenarTextArea(Connection con, TextArea t) {
 		String sqlSelect = "SELECT * FROM Tickets";
 		try {
@@ -63,12 +77,11 @@ public class ConsultarTickets extends JFrame {
 			while (rs.next()) {
 				if (consulta.getText().length() == 0) {
 					consulta.setText(rs.getInt("idTickets") + "-" + rs.getString("FechaTickets") + ", "
-							+ rs.getInt("TotalTicket")+ ", "
-									+ rs.getInt("idArticulosFK1"));
+							+ rs.getInt("TotalTicket") + ", " + rs.getInt("idArticulosFK1"));
 				} else {
-					consulta.setText(consulta.getText() + "\n" + rs.getInt("idTickets") + "-" + rs.getString("FechaTickets") + ", "
-							+ rs.getInt("TotalTicket")+ ", "
-							+ rs.getInt("idArticulosFK1"));
+					consulta.setText(
+							consulta.getText() + "\n" + rs.getInt("idTickets") + "-" + rs.getString("FechaTickets")
+									+ ", " + rs.getInt("TotalTicket") + ", " + rs.getInt("idArticulosFK1"));
 				}
 			}
 			rs.close();
@@ -79,6 +92,11 @@ public class ConsultarTickets extends JFrame {
 		}
 	}
 
+	/**
+	 * Realizamos la conexión con la base de datos
+	 * 
+	 * @return
+	 */
 	private Connection conectar() {
 		String driver = "com.mysql.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/Tiendecita?useSSL=false";
@@ -102,13 +120,17 @@ public class ConsultarTickets extends JFrame {
 		}
 		return con;
 	}
-	
+
+	/**
+	 * Desconectamos a la base de datos
+	 * 
+	 * @param con
+	 */
 	private void desconectar(Connection con) {
 		// TODO Auto-generated method stub
-		try
-		{
+		try {
 			con.close();
+		} catch (Exception e) {
 		}
-		catch(Exception e) {}
 	}
 }

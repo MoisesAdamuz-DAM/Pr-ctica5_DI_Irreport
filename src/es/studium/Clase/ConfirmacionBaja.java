@@ -11,11 +11,20 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * Creamos la interfaz, en la que confirmamos que la baja se ha realizado con
+ * éxito
+ * 
+ * @author Moisés Adamuz
+ *
+ */
 public class ConfirmacionBaja extends JFrame {
 
 	private JPanel contentPane;
 
-
+	/**
+	 * Creamos la interfaz para la confirmación de la baja
+	 */
 	public ConfirmacionBaja() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 317, 161);
@@ -23,11 +32,11 @@ public class ConfirmacionBaja extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel lblNewLabel = new JLabel("\u00A1La baja del art\u00EDculo se realiz\u00F3 correctamente!");
 		lblNewLabel.setBounds(43, 23, 248, 14);
 		contentPane.add(lblNewLabel);
-		
+
 		JButton btnNewButton = new JButton("Aceptar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

@@ -1,6 +1,5 @@
 package es.studium.Clase;
 
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -17,23 +16,13 @@ import java.sql.Statement;
 import java.awt.event.ActionEvent;
 
 /**
- * En esta clase realizaremos el Alta de los artículos de la base de datos Tiendecita
+ * Aquí realizaremos el alta de los artículos
  * 
- * @author Moisés Adamuz Fernández
- * @since 28/01/2020
- * @version  1.0
- * 
- * 
+ * @author Moisés Adamuz
+ *
  */
-public class AltaArticulos extends JFrame implements WindowListener{
+public class AltaArticulos extends JFrame implements WindowListener {
 
-
-	
-	/**
-	 * Comenzamos declarando los atributos 
-	 * Instanciamos la clase ConfirmaciónAltaArticulo, para cuando pulsemos en el botón Aceptar, nos aparecerá la interfaz de confirmación del
-	 * alta
-	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtNombre;
@@ -42,94 +31,81 @@ public class AltaArticulos extends JFrame implements WindowListener{
 	ConfirmacionAltaArticulo correcto;
 
 	/**
-	 *Creamos el método donde estarán todas las instrucciones para la creación de la interfaz de Alta Artículos
-	 *
-	 *@ contentPane JPanel, Contenedor donde meteremos todos lo componentes de la interfaz
-	 *lblNombre JLabel, <b>Indica donde tendremos que escribir el nombre del Artículo</b>
-	 * lblCantidad JCantidad, <b>Indica donde tendremos que escribir las cantidades del artículo</b>
-	 * lblArticulo JArticulo,  <b>Indica donde tendremos que escribir el precio del Artículo</b>
-	 *txtNombre JTextField,  <b>Cuadro de Texto donde tendremos que escribir el nombre del Artículo</b>
-	 * txtCantidad JTextField, <b>Cuadro de Texto donde tendremos que escribir la cantidad del Artículo</b>
-	 * txtArticulo JTextField, <b>Cuadro de Texto donde tendremos que escribir el precio del Artículo</b>
-	 *
+	 * En este método definiremos la interfaz
 	 */
 	public AltaArticulos() {
 		setTitle("Alta Art\u00EDculos");
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);//Con el DISPOSE consigo que no se vea y evito que se cierre la app entera
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);// Con el DISPOSE consigo que no se vea y evito que se cierre
+															// la app entera
 		setBounds(100, 100, 434, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		setVisible(true);
-		
+
 		JLabel lblNombre = new JLabel("Nombre del Art\u00EDculo:");
 		lblNombre.setBounds(52, 35, 148, 14);
 		contentPane.add(lblNombre);
-		
+
 		JLabel lblCantidad = new JLabel("Cantidad del art\u00EDculo:");
 		lblCantidad.setBounds(52, 89, 148, 14);
 		contentPane.add(lblCantidad);
-		
+
 		JLabel lblArticulo = new JLabel("Precio del Art\u00EDculo:");
 		lblArticulo.setBounds(52, 144, 132, 14);
 		contentPane.add(lblArticulo);
-		
+
 		txtNombre = new JTextField();
 		txtNombre.setBounds(193, 32, 139, 20);
 		contentPane.add(txtNombre);
 		txtNombre.setColumns(10);
-		
+
 		txtCantidad = new JTextField();
 		txtCantidad.setBounds(193, 86, 139, 20);
 		contentPane.add(txtCantidad);
 		txtCantidad.setColumns(10);
-		
+
 		txtArticulo = new JTextField();
 		txtArticulo.setBounds(193, 141, 139, 20);
 		contentPane.add(txtArticulo);
 		txtArticulo.setColumns(10);
-		
+
 		JButton btnAceptar = new JButton("Aceptar");
-		
-		
-		/**
-		 * btnAceptar JButton, <b>Botón con el que ejecutaremos la operación</b>*/
+
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				//Conectar a la BD
+				// Conectar a la BD
 				Connection con = conectar();
-				//Hacer el INSERT
-				int respuesta = insertar(con,"Articulos", txtNombre.getText(), txtCantidad.getText(), txtArticulo.getText());
-				//Mostramos resultado
-				if(respuesta == 0)
-				{
-				System.out.println("Alta del articulo correcto");
-				correcto = new ConfirmacionAltaArticulo();
-				correcto.setResizable(false);
-				correcto.setLocationRelativeTo(null);
-				correcto.setVisible(true);
-				dispose();
-				}
-				else
-				{
+				// Hacer el INSERT
+				int respuesta = insertar(con, "Articulos", txtNombre.getText(), txtCantidad.getText(),
+						txtArticulo.getText());
+				// Mostramos resultado
+				if (respuesta == 0) {
+					System.out.println("Alta del articulo correcto");
+					correcto = new ConfirmacionAltaArticulo();
+					correcto.setResizable(false);
+					correcto.setLocationRelativeTo(null);
+					correcto.setVisible(true);
+					dispose();
+				} else {
 					ErrorAltaArticulos error = new ErrorAltaArticulos();
 					error.setResizable(false);
 					error.setLocationRelativeTo(null);
 					error.setVisible(true);
-					
+
 				}
 				desconectar(con);
 			}
-			
+
 		});
 		btnAceptar.setBounds(99, 206, 89, 23);
 		contentPane.add(btnAceptar);
-		
+
 		JButton btnLimpiar = new JButton("Limpiar");
 		btnLimpiar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				txtNombre.selectAll();
 				txtNombre.setText("");
 				txtCantidad.selectAll();
@@ -140,16 +116,13 @@ public class AltaArticulos extends JFrame implements WindowListener{
 		});
 		btnLimpiar.setBounds(230, 206, 89, 23);
 		contentPane.add(btnLimpiar);
-		
-		
+
 	}
+
 	/**
-	 * @exception  try/catch (SQLException) (ClassNotFoundException)
-	 * driver String
-	 *  url String
-	 *  login String
-	 *  password String
-	 *  con Connection*/
+	 * 
+	 * @return devolvemos la conexión
+	 */
 	private Connection conectar() {
 		String driver = "com.mysql.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/Tiendecita?useSSL=false";
@@ -173,77 +146,97 @@ public class AltaArticulos extends JFrame implements WindowListener{
 		}
 		return con;
 	}
-	
+
+	/**
+	 * 
+	 * @param con,       con esta variable estableceremos la conexión para realizar
+	 *                   el alta
+	 * @param Articulos, con esta cadena, nombramos a la tabla
+	 * @param Nombre,    con esta cadena, definimos al campo DescripcionArticulo
+	 * @param Cantidad,  con esta cadena, definimos al campo CantidadStock
+	 * @param Precio,    con esta cadena, deginimos al campo PrecioArticulos
+	 * @return devolvemos la conexión
+	 */
 	private int insertar(Connection con, String Articulos, String Nombre, String Cantidad, String Precio) {
 
 		int respuesta = 0;
-		try
-		{
-			//Creamos un STATEMENT para una consulta SQL INSERT
+		try {
+			// Creamos un STATEMENT para una consulta SQL INSERT
 			Statement sta = con.createStatement();
 			String cadenaSQL = "INSERT INTO " + Articulos
-					+ " (`DescripcionArticulos`, `CantidadStock`,`PrecioArticulos`)"
-					+ "VALUES ('" + Nombre + "', '" + Cantidad + "', '" + Precio +  "')";
-			
+					+ " (`DescripcionArticulos`, `CantidadStock`,`PrecioArticulos`)" + "VALUES ('" + Nombre + "', '"
+					+ Cantidad + "', '" + Precio + "')";
+
 			System.out.println(cadenaSQL);
 			sta.executeUpdate(cadenaSQL);
 			sta.close();
+		} catch (SQLException ex) {
+			System.out.println("ERROR:al hacer un Insert");
+			ex.printStackTrace();
+			respuesta = 1;
 		}
-	    catch (SQLException ex) {
-		System.out.println("ERROR:al hacer un Insert");
-		ex.printStackTrace();
-		respuesta = 1;
-	}
 		return respuesta;
 	}
-	private void desconectar(Connection con) 
-	{
-		try
-		{
-			con.close();
-		}
-		catch(Exception e) {}
-		
-	}
-	@Override
-	public void windowOpened(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void windowClosing(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void windowClosed(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void windowIconified(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void windowDeiconified(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void windowActivated(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void windowDeactivated(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	
 
+	/**
+	 * 
+	 * @param con, cerraremos la conexión
+	 */
+	private void desconectar(Connection con) {
+		try {
+			con.close();
+		} catch (Exception e) {
+		}
+
+	}
+
+	/**
+	 * Cierra la interfaz
+	 */
 	public void cerrar() {
 		this.setVisible(false);
 	}
-	
+
+	@Override
+	public void windowOpened(WindowEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void windowClosing(WindowEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void windowClosed(WindowEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void windowIconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void windowDeiconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void windowActivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void windowDeactivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
 }

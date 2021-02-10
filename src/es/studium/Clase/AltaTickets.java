@@ -19,9 +19,14 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Choice;
 import java.awt.Button;
 
+/**
+ * En esta clase, realizaremos el Alta de los Tickets
+ * 
+ * @author Moisés Adamuz
+ *
+ */
 public class AltaTickets extends JFrame {
 
-	
 	private JPanel contentPane;
 	ConfirmacionAltaArticulo correcto = new ConfirmacionAltaArticulo();
 	ErrorAltaArticulos error = new ErrorAltaArticulos();
@@ -29,43 +34,45 @@ public class AltaTickets extends JFrame {
 	private JTextField txtTotal;
 	Choice choArticulos = new Choice();
 
-	
+	/**
+	 * Definimos la iinterfaz del Alta Tickets
+	 */
 	public AltaTickets() {
 		setTitle("Alta Tickets");
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);//Con el DISPOSE consigo que no se vea y evito que se cierre la app entera
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);// Con el DISPOSE consigo que no se vea y evito que se cierre
+															// la app entera
 		setBounds(100, 100, 434, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		setVisible(true);
-		
+
 		JLabel lblFecha = new JLabel("Fecha Tickets: ");
 		lblFecha.setBounds(34, 36, 108, 14);
 		getContentPane().add(lblFecha);
-		
+
 		JLabel lblTotal = new JLabel("Total Ticket:");
 		lblTotal.setBounds(34, 81, 74, 14);
 		getContentPane().add(lblTotal);
-		
+
 		JLabel lblArticulos = new JLabel("Articulos:");
 		lblArticulos.setBounds(51, 132, 74, 14);
 		getContentPane().add(lblArticulos);
-		
+
 		txtFecha = new JTextField();
 		txtFecha.setBounds(152, 33, 145, 20);
 		getContentPane().add(txtFecha);
 		txtFecha.setColumns(10);
-		
+
 		txtTotal = new JTextField();
 		txtTotal.setBounds(152, 78, 145, 20);
 		getContentPane().add(txtTotal);
 		txtTotal.setColumns(10);
-		
-		
+
 		choArticulos.setBounds(152, 126, 145, 20);
 		getContentPane().add(choArticulos);
-		
+
 		// Montar el Choice
 		choArticulos.add("Seleccionar uno...");
 		// Conectar a la base de datos
@@ -77,13 +84,11 @@ public class AltaTickets extends JFrame {
 			// CREAR UN STATEMENT PARA UNA CONSULTA SELECT
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(sqlSelect);
-			while (rs.next()) 
-			{
-				//Queremos que nos aparezca el el choice, el idEmpleado y el nombreEmpleado
+			while (rs.next()) {
+				// Queremos que nos aparezca el el choice, el idEmpleado y el nombreEmpleado
 
-				choArticulos.add(rs.getInt("idArticulos") 
-						+ "-" + rs.getString("DescripcionArticulos") 
-						+ ", "+ rs.getInt("CantidadStock"));
+				choArticulos.add(rs.getInt("idArticulos") + "-" + rs.getString("DescripcionArticulos") + ", "
+						+ rs.getInt("CantidadStock"));
 			}
 			rs.close();
 			stmt.close();
@@ -91,44 +96,46 @@ public class AltaTickets extends JFrame {
 			System.out.println("ERROR:al consultar");
 			ex.printStackTrace();
 		}
-		
+
 		Button btnAceptar = new Button("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//Conectar BD
+				// Conectar BD
 				Connection con = conectar();
-				
+
 				String[] Tickets = choArticulos.getSelectedItem().split("-");
-			
-				//Hacer el INSERT
-				int respuesta = insertar(con, "Tickets",txtFecha.getText(),Integer.parseInt(txtTotal.getText()),Tickets[0]);
-				
-				//Mostramos resultado
-				if(respuesta == 0)
-				{
-				
-				correcto.setVisible(true);
-					
+
+				// Hacer el INSERT
+				int respuesta = insertar(con, "Tickets", txtFecha.getText(), Integer.parseInt(txtTotal.getText()),
+						Tickets[0]);
+
+				// Mostramos resultado
+				if (respuesta == 0) {
+
+					correcto.setVisible(true);
+
 				}
-				
-				
-				else 
-				{
+
+				else {
 					error.setVisible(true);
 				}
 				desconectar(con);
-			
+
 			}
 		});
 		btnAceptar.setBounds(126, 188, 70, 22);
 		getContentPane().add(btnAceptar);
-		
+
 		Button btnBorrar = new Button("Limpiar");
 		btnBorrar.setBounds(249, 188, 70, 22);
 		getContentPane().add(btnBorrar);
-	
 
-}
+	}
+
+	/**
+	 * 
+	 * @return devolvemos la conexión
+	 */
 	private Connection conectar() {
 		String driver = "com.mysql.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/Tiendecita?useSSL=false";
@@ -152,15 +159,23 @@ public class AltaTickets extends JFrame {
 		}
 		return con;
 	}
-	private int insertar(Connection con, String Tickets,  String FechaTickets, int TotalTicket, String idArticulosFK1)
-	 {
+
+	/**
+	 * 
+	 * @param con,            establecemos la conexión
+	 * @param Tickets,        llamamos a la tabla
+	 * @param FechaTickets,   con esta cadena haremos mención al campo FechaTickets
+	 * @param TotalTicket,    con este entero haremos mención al campo TotalTicket
+	 * @param idArticulosFK1, con esta cadena hacemos mención al foreign key
+	 * @return retornamos la respuesta, para ver si todo ha salido correctamente
+	 */
+	private int insertar(Connection con, String Tickets, String FechaTickets, int TotalTicket, String idArticulosFK1) {
 		int respuesta = 0;
 		try {
 			// Creamos un STATEMENT para una consulta SQL INSERT.
 			Statement sta = con.createStatement();
-			String cadenaSQL = "INSERT INTO " + Tickets
-					+ " (`FechaTickets`,`TotalTicket`,`idArticulosFK1`) "
-					+ "VALUES ('" +  FechaTickets + "', '" + TotalTicket + "','" + idArticulosFK1 + "')";
+			String cadenaSQL = "INSERT INTO " + Tickets + " (`FechaTickets`,`TotalTicket`,`idArticulosFK1`) "
+					+ "VALUES ('" + FechaTickets + "', '" + TotalTicket + "','" + idArticulosFK1 + "')";
 
 			System.out.println(cadenaSQL);
 			sta.executeUpdate(cadenaSQL);
@@ -170,15 +185,19 @@ public class AltaTickets extends JFrame {
 			ex.printStackTrace();
 			respuesta = 1;
 		}
-		return  respuesta;
+		return respuesta;
 	}
-	private void desconectar(Connection con) 
-	{
-		try
-		{
+
+	/**
+	 * Cerramos la conexión
+	 * 
+	 * @param con
+	 */
+	private void desconectar(Connection con) {
+		try {
 			con.close();
+		} catch (Exception e) {
 		}
-		catch(Exception e) {}
-		
+
 	}
 }
