@@ -63,7 +63,7 @@ public class ConsultarTickets extends JFrame {
 	}
 
 	/**
-	 * 
+	 * Con este método, rellenamos el textArea con los datos obtenidos de la BD
 	 * @param con, establecemos la conexión
 	 * @param t,   definimos el text area, donde queremos que nos meta la
 	 *             información

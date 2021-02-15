@@ -133,7 +133,7 @@ public class AltaTickets extends JFrame {
 	}
 
 	/**
-	 * 
+	 * Con este método, estableceremos la conexión con la BD
 	 * @return devolvemos la conexión
 	 */
 	private Connection conectar() {
@@ -161,6 +161,8 @@ public class AltaTickets extends JFrame {
 	}
 
 	/**
+	 * Con este método, escribiremos la sentencia SQL para realizar la inserción  de los datos
+	 * en la BD
 	 * 
 	 * @param con,            establecemos la conexión
 	 * @param Tickets,        llamamos a la tabla

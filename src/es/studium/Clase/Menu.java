@@ -33,7 +33,7 @@ public class Menu extends JFrame {
 	private JPanel contentPane;
 
 	/**
-	 * 
+	 * Con este método, arrancamos la aplicación
 	 * 
 	 * @param args, Realizamos el main, con el cual ejecutamos toda la aplicación
 	 */

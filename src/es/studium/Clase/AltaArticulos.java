@@ -120,7 +120,7 @@ public class AltaArticulos extends JFrame implements WindowListener {
 	}
 
 	/**
-	 * 
+	 * En este método, estableceremos la conexión con la base de datos
 	 * @return devolvemos la conexión
 	 */
 	private Connection conectar() {
@@ -148,9 +148,9 @@ public class AltaArticulos extends JFrame implements WindowListener {
 	}
 
 	/**
+	 * En este método, escribiremos la sentencia SQL, con la cual insertaremos los datos en la BD
 	 * 
-	 * @param con,       con esta variable estableceremos la conexión para realizar
-	 *                   el alta
+	 * @param con,       con esta variable estableceremos la conexión para realizar el alta
 	 * @param Articulos, con esta cadena, nombramos a la tabla
 	 * @param Nombre,    con esta cadena, definimos al campo DescripcionArticulo
 	 * @param Cantidad,  con esta cadena, definimos al campo CantidadStock
@@ -179,7 +179,7 @@ public class AltaArticulos extends JFrame implements WindowListener {
 	}
 
 	/**
-	 * 
+	 * Con este método, cerraremos la conexión una vez cerremos la aplicación
 	 * @param con, cerraremos la conexión
 	 */
 	private void desconectar(Connection con) {

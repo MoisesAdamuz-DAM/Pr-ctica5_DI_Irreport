@@ -116,7 +116,7 @@ public class ConsultarArticulos extends JFrame {
 	}
 
 	/**
-	 * 
+	 * Con este método, rellenamos el textArea con los datos obtenidos de la BD
 	 * @param con, realizamos la coexión con la base de datos
 	 * @param t,   indicamo el text area, donde queremos que nos meta la información
 	 *             de la consulta

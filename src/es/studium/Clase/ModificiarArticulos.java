@@ -278,6 +278,7 @@ public class ModificiarArticulos extends JFrame implements ItemListener {
 			}
 
 			/**
+			 * Con este método, borraremos los datos que indiquemos
 			 * 
 			 * @param con,         establecemos conexión con la base de datos
 			 * @param idArticulos, indicamos según el id, los datos que queremos borrar
@@ -360,7 +361,7 @@ public class ModificiarArticulos extends JFrame implements ItemListener {
 	}
 
 	/**
-	 * 
+	 * Con este método realizamos la conexión para el segundo choice
 	 */
 	public void itemStateChanged(ItemEvent e) {
 		// Conectar a la base de datos

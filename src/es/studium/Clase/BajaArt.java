@@ -265,7 +265,7 @@ public class BajaArt extends JFrame {
 	}
 
 	/**
-	 * Realizamos el borrado
+	 * Escribiremos la sentencia SQL, para realizar la baja de la Base de Datos
 	 * 
 	 * @param con,         establecemos la conexción para poder realizar el borrado
 	 * @param idArticulos, establecemos el parámetro con el que queremos hacer el
@@ -293,7 +293,7 @@ public class BajaArt extends JFrame {
 	}
 
 	/**
-	 * 
+	 * Con este método, cerraremos la conexión con la base de datos
 	 * @param con, cerramos la conexión
 	 */
 	private void desconectar(Connection con) {
